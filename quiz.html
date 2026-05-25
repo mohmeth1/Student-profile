@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Result Dashboard</title>
+  <link rel="stylesheet" href="quiz.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <h1>QuizResult</h1>
+          <p>Futuristic learning portal</p>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-link active" data-panel="dashboardPanel">Dashboard</button>
+        <button class="nav-link" data-panel="selectionPanel">Quiz Hub</button>
+        <button class="nav-link" data-panel="leaderboardPanel">Leaderboard</button>
+        <button class="nav-link" data-panel="certificatePanel">Certificate</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="ghost-btn">Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Welcome back,</p>
+          <h2 id="headerUsername">Student</h2>
+        </div>
+        <div class="profile-chip">
+          <div class="profile-avatar">Q</div>
+          <div>
+            <span id="userLabel">Quiz Master</span>
+            <small id="statusLabel">Active now</small>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero-card glass-card">
+        <div>
+          <p class="eyebrow">Quiz Portal</p>
+          <h1>Open your next level with NeoQuiz</h1>
+          <p>Start with a category, choose difficulty, and experience a premium timed quiz with progress tracking.</p>
+        </div>
+        <div class="hero-stat">
+          <span>Progress</span>
+          <strong id="heroProgress">0%</strong>
+        </div>
+      </section>
+
+      <section class="quick-cards">
+        <div class="small-card glass-card">
+          <p>Total Questions</p>
+          <strong id="totalQuestions">0</strong>
+        </div>
+        <div class="small-card glass-card">
+          <p>Completed</p>
+          <strong id="completedCount">0</strong>
+        </div>
+        <div class="small-card glass-card">
+          <p>Highest Score</p>
+          <strong id="bestScore">0%</strong>
+        </div>
+      </section>
+
+      <section class="panel-section active-panel" id="dashboardPanel">
+        <div class="panel-grid">
+          <article class="panel-card glass-card">
+            <div>
+              <p class="eyebrow">Resume Mode</p>
+              <h3>Continue quiz progress</h3>
+            </div>
+            <button id="resumeBtn" class="glow-btn">Resume Quiz</button>
+          </article>
+          <article class="panel-card glass-card">
+            <div>
+              <p class="eyebrow">New Attempt</p>
+              <h3>Start a fresh quiz</h3>
+            </div>
+            <button id="newQuizBtn" class="ghost-btn">New Quiz</button>
+          </article>
+          <article class="panel-card glass-card">
+            <div>
+              <p class="eyebrow">Quick Stats</p>
+              <h3 id="currentCategoryText">Category: —</h3>
+            </div>
+            <span class="tag" id="currentDifficultyText">Difficulty: —</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel-section" id="selectionPanel">
+        <div class="section-head">
+          <p class="eyebrow">Quiz Hub</p>
+          <h2>Pick a category & difficulty</h2>
+        </div>
+
+        <div class="category-grid" id="categoryGrid"></div>
+
+        <div class="difficulty-row">
+          <button class="pill-btn active" data-difficulty="Easy">Easy</button>
+          <button class="pill-btn" data-difficulty="Medium">Medium</button>
+          <button class="pill-btn" data-difficulty="Hard">Hard</button>
+        </div>
+
+        <div class="selection-actions">
+          <button id="startQuizBtn" class="glow-btn">Start Quiz</button>
+          <p class="hint-text">Each question has a timer. Answer quickly and accurately.</p>
+        </div>
+      </section>
+
+      <section class="panel-section" id="questionPanel">
+        <div class="question-shell glass-card">
+          <div class="question-top">
+            <div>
+              <p class="eyebrow">Question <span id="questionIndex">1</span> of <span id="questionTotal">1</span></p>
+              <h2 id="questionText">Loading question...</h2>
+            </div>
+            <div class="timer-ring">
+              <span id="timerText">20s</span>
+            </div>
+          </div>
+
+          <div class="options-grid" id="optionsGrid"></div>
+
+          <div class="question-footer">
+            <div class="progress-track">
+              <div id="questionProgress" class="progress-fill"></div>
+            </div>
+            <div class="question-actions">
+              <button id="prevBtn" class="ghost-btn">Previous</button>
+              <button id="nextBtn" class="glow-btn">Next</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-section" id="resultPanel">
+        <div class="result-card glass-card">
+          <div class="result-header">
+            <span id="resultBadge" class="result-badge">Result</span>
+            <h2 id="resultScore">0 / 0</h2>
+            <p id="resultSubtitle">Summary of your performance.</p>
+          </div>
+
+          <div class="stats-grid">
+            <div>
+              <p>Correct</p>
+              <strong id="correctCount">0</strong>
+            </div>
+            <div>
+              <p>Wrong</p>
+              <strong id="wrongCount">0</strong>
+            </div>
+            <div>
+              <p>Unanswered</p>
+              <strong id="unansweredCount">0</strong>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button id="restartBtn" class="glow-btn">Restart Quiz</button>
+            <button id="viewCertificateBtn" class="ghost-btn">View Certificate</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-section" id="leaderboardPanel">
+        <div class="section-head">
+          <p class="eyebrow">Leaderboard</p>
+          <h2>Top quiz performers</h2>
+        </div>
+        <div class="leaderboard-grid" id="leaderboardGrid"></div>
+      </section>
+
+      <section class="panel-section" id="certificatePanel">
+        <div class="certificate-card glass-card">
+          <div class="certificate-heading">
+            <p class="eyebrow">Certificate of Completion</p>
+            <h2>Quiz Excellence</h2>
+          </div>
+          <div class="certificate-body">
+            <p class="certificate-name" id="certificateName">Student Name</p>
+            <p id="certificateSummary">Completed the NeoQuiz challenge with outstanding performance.</p>
+            <div class="certificate-meta">
+              <div>
+                <p>Score</p>
+                <strong id="certificateScore">0%</strong>
+              </div>
+              <div>
+                <p>Status</p>
+                <strong id="certificateStatus">Pending</strong>
+              </div>
+            </div>
+          </div>
+          <button id="certificateHomeBtn" class="glow-btn">Back to Dashboard</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="quizToast" class="quiz-toast"></div>
+  <script src="quiz.js"></script>
+</body>
+</html>
